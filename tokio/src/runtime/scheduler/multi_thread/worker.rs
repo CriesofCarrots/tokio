@@ -862,11 +862,7 @@ impl Core {
     }
 
     fn should_notify_others(&self) -> bool {
-        // If there are tasks available to steal, but this worker is not
-        // looking for tasks to steal, notify another worker.
-        if self.is_searching {
-            return false;
-        }
+        // If there are tasks available to steal, notify a worker
         self.lifo_slot.is_some() as usize + self.run_queue.len() > 1
     }
 
